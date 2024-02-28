@@ -18,24 +18,25 @@ class UserController extends Controller
         return view('user.register-employer');
     }
 
-    public function storeSeeker(RegistrationFormRequest $request){
-       
-        User::create([
-            'name'=>request('name'),
-            'email'=>request('email'),
-            'password'=>request('password'),
-            'user_type' => 'seeker'
+    public function storeSeeker(RegistrationFormRequest $request)
+    {
+         User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'user_type' => 'seeker',
         ]);
-
-        return redirect('login')->with('your account was created');;
+    
+      
     }
+    
     public function storeEmployer(RegistrationFormRequest $request){
        
-        User::create([
-            'name'=>request('name'),
-            'email'=>request('email'),
-            'password'=>request('password'),
-            'user_type' => 'employer',
+       User::create([
+            'name'=> $request->input('name'),
+            'email'=>$request->input('email'),
+            'password'=>$request->input('password'),
+            'user_type' =>'employer',
             'user_trail' =>now()->addWeeks()
         ]);
 
@@ -50,13 +51,13 @@ class UserController extends Controller
     public function postLogin(Request $request){
         
         $request->validate([
-            'email'=>['required'],
+            'email' => ['required', 'email', 'max:255', ],
             'password'=>['required'],
         ]);
 
         $credentials = $request->only('email','password');
         if(Auth::attempt($credentials)){
-            return redirect()->intended('dashboard');
+            return redirect('dashboard');
         }
 
         return 'something went wrong';

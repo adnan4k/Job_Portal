@@ -19,22 +19,22 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 ms-auto mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                <a class="nav-link active" aria-current="page" href="/user">Home</a>
               </li>
                @if(!Auth::check())
                 <li class="nav-item">
-                    <a class="nav-link">Login</a>
+                  <a class="nav-link" href="{{route('login')}}">Login</a>
+                </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('create.seeker')}}">Job Seeker</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{create.seeker}}">Job Seeker</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{route(create.employer)}}">Employer</a>
+                    <a class="nav-link" href="{{route('create.employer')}}">Employer</a>
                   </li>
               @endif
               @if (Auth::check())
               <li class="nav-item">
-                <a class="nav-link"  id="logout"  href="{{route('login')}}">Logout</a>
+                <a class="nav-link"  id="logout"  href="{{route('logout')}}">Logout</a>
               </li>
               <form action="{{route('logout')}}" id="logout-form">@csrf</form>
               @endif

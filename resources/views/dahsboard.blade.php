@@ -9,6 +9,12 @@
 
     @endif
     <div class="row justify-content-center">
+        @if(Session::has('success'))
+        <div class="success alert-success">{{Session::get('success')}} </div>
+        @endif
+        @if(Session::has('error'))
+        <div class="success alert-danger">{{Session::get('error')}}</div>
+        @endif
 {{-- 
         <div class="col-md-3">
             <div class="card-counter primary">
