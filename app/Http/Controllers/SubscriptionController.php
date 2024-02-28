@@ -60,8 +60,8 @@ class SubscriptionController extends Controller
                $selectPlan = null;
                if($request->is('pay/weekly')){
                   $selectPlan = $plans['weekly'];
-                  $billlingEnds = now()->addWeek()->startOfDay()->toString();
-               }elseif($request->is('pay/monthly')){
+                  $billingEnds = now()->addWeek()->startOfDay()->toDateTimeString();
+                }elseif($request->is('pay/monthly')){
                   $selectPlan = $plans['monthly'];
                   $billlingEnds = now()->addMonth()->startOfDay()->toString();
                }elseif($request->is('pay/yearly')){
@@ -106,10 +106,10 @@ class SubscriptionController extends Controller
 
         $plan = $request->plan;
         $billlingEnds = $request->billing_ends;
-
-        User::where('id',$request->user()->id)->update([
+        //   dd($plan,$billlingEnds);
+        User::where('id',auth()->user()->id)->update([
             'plan'=>$plan,
-             'billingEnds' =>$billlingEnds,
+             'billing_ends' =>$billlingEnds,
              'status' =>'paid'
         ]);
     return redirect()->route('dashboard')->with('success','payment was successfully processs');
