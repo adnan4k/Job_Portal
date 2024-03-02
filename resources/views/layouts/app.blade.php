@@ -25,12 +25,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('login')}}">Login</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{route('subscribe')}}">Subscribe</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{route('dashboard')}}">Dashboard</a>
-                </li>
+          
                   <li class="nav-item">
                     <a class="nav-link" href="{{route('create.seeker')}}">Job Seeker</a>
                   </li>
@@ -40,8 +35,7 @@
               @endif
               @if (Auth::check())
               <li class="nav-item">
-                <form action="{{route('logout')}}" method="POST"></form>
-                <button type="submit" class="nav-link"  id="logout">Logout</button>
+                
               </li>
               <form action="{{route('logout')}}" id="logout-form">@csrf</form>
               @endif
@@ -49,13 +43,7 @@
           </div>
         </div>
       </nav>
-      <script>
-        let logout = document.getElementById('logout')
-        let form = document.getElementById('logout-form')
-          logout.addEventListener('click',function(){
-            form.submit()
-          })
-      </script>
+     
       @yield('content')
 </body>
 </html>

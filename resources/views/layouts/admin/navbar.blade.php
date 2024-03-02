@@ -16,10 +16,19 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="#!">Settings</a></li>
-                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <li><a class="dropdown-item" href="{{route('subscribe')}}">Subscription</a></li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#!">Logout</a></li>
+                <li><form action="{{route('logout')}}" method="POST"  ></form>
+                    <button type="submit" class="dropdown-item"  id="logout">Logout</button></li>
             </ul>
         </li>
     </ul>
 </nav>
+
+<script>
+    let logout = document.getElementById('logout')
+    let form = document.getElementById('logout-form')
+      logout.addEventListener('click',function(){
+        form.submit()
+      })
+  </script>
