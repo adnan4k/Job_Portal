@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\donotAllowUserToMakePayment;
 use Stripe\Plan;
 use Stripe\Stripe;
 use App\Models\User;
@@ -9,6 +10,8 @@ use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use PhpParser\Node\Stmt\TryCatch;
 use App\Http\Middleware\isEmployer;
+use App\Mail\PurchaseMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 
 class SubscriptionController extends Controller
@@ -20,9 +23,9 @@ class SubscriptionController extends Controller
 
     // public function __construct()
     // {
-    //     $this->middleware(['auth',isEmployer::class]);
+    //     $this->middleware(['auth',isEmployer::class,donotAllowUserToMakePayment::class]);
     // }
-    //
+    
     public function subscribe(){
 
         return view('subscription.index');
@@ -112,6 +115,14 @@ class SubscriptionController extends Controller
              'billing_ends' =>$billlingEnds,
              'status' =>'paid'
         ]);
+        try {
+            
+            Mail::to(auth()->user())->queue(new PurchaseMail($plan,$billlingEnds));
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json($th);
+        }
+
     return redirect()->route('dashboard')->with('success','payment was successfully processs');
     }
 

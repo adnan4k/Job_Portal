@@ -21,7 +21,7 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/user">Home</a>
               </li>
-               @if(!Auth::check())
+               @if(Auth::check())
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('login')}}">Login</a>
                 </li>
