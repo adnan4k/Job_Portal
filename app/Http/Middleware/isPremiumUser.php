@@ -15,7 +15,7 @@ class isPremiumUser
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user()->trial > date('Y-m-d') || $request->user()->billing_ends > date('Y-m-d')){
+        if($request->user()->user_trail > date('Y-m-d') || $request->user()->billing_ends > date('Y-m-d')){
             return $next($request);
 
         }
