@@ -18,7 +18,8 @@ class Listing extends Model
        'address',
        'feature_image',
         'application_close_date',
-        'feature_image'
+        'feature_image',
+        'slug'
        
     ];
 }
