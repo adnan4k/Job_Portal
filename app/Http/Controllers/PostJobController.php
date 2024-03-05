@@ -13,4 +13,17 @@ class PostJobController extends Controller
         return view('job.create');
         
     }
+
+    public function store(Request $request){
+
+         $this->validate($request,[
+            'title' =>'required',
+            'feature_image' =>'required',
+            'description' =>'required',
+            'roles' =>'required',
+            'job_type' =>'required',
+            'address' =>'required',
+            'date' =>'required',
+         ]);
+    }
 }
