@@ -71,6 +71,19 @@ class PostJobController extends Controller
 
         Listing::find($id)->update($request->except('feature_image'));
 
-        return back()->with('success','Your job is successfully update');
+        return redirect('job.index')->with('success','Your job is successfully update');
+    }
+
+    public function index(){
+        $jobs = Listing::where('user_id',auth()->user()->id)->get();
+        // dd($jobs);
+        return view('job.index',compact('jobs'));
+    }
+
+    public function destroy($id){
+
+        Listing::find($id)->delete();
+
+        return redirect('job.index')-with('success','The job has been deleted successfully');
     }
 }
