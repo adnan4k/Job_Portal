@@ -82,8 +82,11 @@ class PostJobController extends Controller
 
     public function destroy($id){
 
+         if(!$id){
+            return back()-with('success','The give id donot exist');
+        }
         Listing::find($id)->delete();
 
-        return redirect('job.index')-with('success','The job has been deleted successfully');
+        return back()-with('success','The job has been deleted successfully');
     }
 }

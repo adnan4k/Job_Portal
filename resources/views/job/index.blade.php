@@ -12,6 +12,9 @@
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
                         All Jobs
+                        @if (Session::has('success'))
+                            <div class=" alert alert-success">{{ Session::get('success') }}</div>
+                        @endif
                     </div>
                     <div class="card-body" style="width: 100%;">
                         <table id="datatablesSimple" style="width: 100%;">

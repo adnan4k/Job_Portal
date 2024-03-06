@@ -49,8 +49,8 @@ use Stripe\Subscription;
  Route::post('/job/store',[PostJobController::class,'store'])->name('job.store')->middleware(isPremiumUser::class);
  Route::get('/job/{listing}/edit',[PostJobController::class,'edit'])->name('job.edit')->middleware(isPremiumUser::class);
  Route::put('/job/{id}/update',[PostJobController::class,'update'])->name('job.update')->middleware(isPremiumUser::class);
- Route::get('/job',[PostJobController::class,'index'])->name('job.index')->middleware(isPremiumUser::class);
- Route::delete('/job/{id}/delete',[PostJobController::class,'destroy'])->name('job.delete')->middleware(isPremiumUser::class);
+ Route::get('/job',[PostJobController::class,'index'])->name('job.index');
+ Route::delete('/job/{id}/delete',[PostJobController::class,'destroy'])->name('job.delete');
 
 
 
