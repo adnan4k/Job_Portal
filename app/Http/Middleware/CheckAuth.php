@@ -4,11 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Psy\Readline\Hoa\Console;
-use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\HttpFoundation\Response;
 
-class isEmployer
+class CheckAuth
 {
     /**
      * Handle an incoming request.
@@ -16,12 +14,11 @@ class isEmployer
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    {    
-        if(request()->user()->user_type == 'employer'){
+    {
+        if(!auth()->check()){
             return $next($request);
-
         }else{
-            return abort(401);
+            return redirect()->to('/');
         }
     }
 }
