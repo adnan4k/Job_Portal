@@ -57,7 +57,11 @@ class UserController extends Controller
 
         $credentials = $request->only('email','password');
         if(Auth::attempt($credentials)){
-            return redirect('dashboard');
+            if(auth()->user()->user_type == 'employer'){
+                return redirect('dashboard');
+            }else{
+                return redirect()->to('/');
+            }
         }
 
         return 'something went wrong';
@@ -67,5 +71,21 @@ class UserController extends Controller
 
         auth()->logout();
         return redirect('login');
+    }
+
+    public function profile(){
+
+        return view('profile.index');
+    }
+    public function update(Request $request){
+        if($request->hasFile('profile_pic')){
+            $imagePath = $request->file('profile_pic')->store('images', 'public');
+            User::find(auth()->user()->id)->update(['profile_pic',$imagePath]);
+        }
+
+        User::find(auth()->user()->id)->update($request->except('profile_pic'));
+
+        return redirect('profile.index')->with('success','Your job is successfully update');
+
     }
 }

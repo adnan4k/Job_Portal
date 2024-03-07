@@ -38,7 +38,13 @@ use Stripe\Subscription;
 //  Route::get('/verify',[DashboardController::class,'verify'])->name('verification.notice');
  Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard')
  ->middleware('verified')
- ->middleware('auth');
+ ->middleware('auth')
+ ->middleware(isEmployer::class);
+
+ Route::get('/user/profile',[UserController::class,'profile'])->name('user.profile')->middleware('auth');
+ Route::post('/user/profile',[UserController::class,'update'])->name('user.update.profile')->middleware('auth');
+
+
  Route::get('/subscribe',[SubscriptionController::class,'subscribe'])->name('subscribe');
  Route::get('/pay/weekly',[SubscriptionController::class,'initiatePayment'])->name('pay.weekly');
  Route::get('/pay/monthly',[SubscriptionController::class,'initiatePayment'])->name('pay.monthly');
