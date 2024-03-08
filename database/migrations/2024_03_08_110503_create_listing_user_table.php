@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->boolean('shortlisted')->default(false);
             $table->timestamps();
+            $table->foreign('listing_id')->references('id')->on('listings')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

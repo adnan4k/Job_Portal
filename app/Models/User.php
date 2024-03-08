@@ -53,7 +53,7 @@ class User extends Authenticatable
     ];
 
     public function listings(){
-        $this->belongsToMany(Listing::class)
+        $this->belongsToMany(Listing::class,'listing_user','user_id','listing_id')
         ->withPivot('shortlisted')
         ->withTimestamps();
     }
