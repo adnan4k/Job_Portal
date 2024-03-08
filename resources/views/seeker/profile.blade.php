@@ -36,7 +36,10 @@
         @if(Session::has('success'))
         <div class="alert alert-success">{{Session::get('success')}}</div>
         @endif
-        <form action="{{route('seeker.password')}}" method="post">@csrf
+        @if(Session::has('error'))
+        <div class="alert alert-danger">{{Session::get('error')}}</div>
+        @endif
+        <form action="{{route('upload.resume')}}" method="post" enctype="multipart/form-data">@csrf
             <div class="col-md-8">
                
                

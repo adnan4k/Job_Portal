@@ -115,12 +115,19 @@ class UserController extends Controller
     }
 
     public function uploadResume(Request $request){
+           $request->validate([
+            'resume'=>'required'
+           ]);
+        //  dd($request->resume);
         if($request->hasFile('resume')){
             $resume = $request->file('resume')->store('resume', 'public');
-            User::find(auth()->user()->id)->update(['profile_pic',$resume]);
+            User::find(auth()->user()->id)->update(['resume',$resume]);
+            return back()->with('success','Your resume is successfully update');
+
+        }else{
+            return back()->with('error','something went wrong');
         }
 
 
-        return back()->with('success','Your resume is successfully update');
     }
 }
