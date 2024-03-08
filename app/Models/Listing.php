@@ -22,4 +22,10 @@ class Listing extends Model
         'slug'
        
     ];
+
+    public function users(){
+          $this->belongsToMany(User::class)
+          ->withPivot('shortlisted')
+          ->withTimestamps();
+    }
 }

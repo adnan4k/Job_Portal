@@ -51,4 +51,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function listings(){
+        $this->belongsToMany(Listing::class)
+        ->withPivot('shortlisted')
+        ->withTimestamps();
+    }
 }
