@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostJobController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Middleware\CheckAuth;
@@ -29,6 +30,7 @@ use Stripe\Subscription;
  
 //     return redirect('/home');
 // })->middleware(['auth', 'signed'])->name('verification.verify');
+ Route::get('/',[HomeController::class,'index']);
  Route::get('/register/seeker',[UserController::class,'createSeeker'])->name('create.seeker')->middleware(CheckAuth::class);
  Route::post('/register/seeker',[UserController::class,'storeSeeker'])->name('store.seeker')->middleware(CheckAuth::class);
  Route::get('/register/employer',[UserController::class,'createEmployer'])->name('create.employer')->middleware(CheckAuth::class);
@@ -43,6 +45,7 @@ use Stripe\Subscription;
 
  Route::get('/user/profile',[UserController::class,'profile'])->name('user.profile')->middleware('auth');
  Route::post('/user/profile',[UserController::class,'update'])->name('user.update.profile')->middleware('auth');
+ Route::get('/user/seeker/profile',[UserController::class,'seekerProfile'])->name('seeker.profile')->middleware('auth');
 
 
  Route::get('/subscribe',[SubscriptionController::class,'subscribe'])->name('subscribe');
