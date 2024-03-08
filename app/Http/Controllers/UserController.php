@@ -113,4 +113,14 @@ class UserController extends Controller
         return back()->with('success','Your password is updated successfully');
 
     }
+
+    public function uploadResume(Request $request){
+        if($request->hasFile('resume')){
+            $resume = $request->file('resume')->store('resume', 'public');
+            User::find(auth()->user()->id)->update(['profile_pic',$resume]);
+        }
+
+
+        return back()->with('success','Your resume is successfully update');
+    }
 }

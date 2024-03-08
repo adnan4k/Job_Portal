@@ -47,6 +47,7 @@ use Stripe\Subscription;
  Route::post('/user/profile',[UserController::class,'update'])->name('user.update.profile')->middleware('auth');
  Route::get('/user/seeker/profile',[UserController::class,'seekerProfile'])->name('seeker.profile')->middleware('auth');
  Route::post('/user/password',[UserController::class,'changePassword'])->name('seeker.password')->middleware('auth');
+ Route::post('/user/resume',[UserController::class,'uploadResume'])->name('upload.resume')->middleware('auth');
 
 
  Route::get('/subscribe',[SubscriptionController::class,'subscribe'])->name('subscribe');

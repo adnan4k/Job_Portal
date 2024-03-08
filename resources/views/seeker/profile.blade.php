@@ -32,6 +32,25 @@
     </div>
 
     <div class="row justify-content-center">
+        <h2>Update resume</h2>
+        @if(Session::has('success'))
+        <div class="alert alert-success">{{Session::get('success')}}</div>
+        @endif
+        <form action="{{route('seeker.password')}}" method="post">@csrf
+            <div class="col-md-8">
+               
+               
+                <div class="form-group">
+                    <label for="resume">Update resume</label>
+                    <input type="file" class="form-control" name="resume" id="resume">
+                </div>
+                <div class="form-group mt-4">
+                    <button class="btn btn-success" type="submit">updload</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row justify-content-center">
         <h2>Change your password</h2>
 
         <form action="{{route('seeker.password')}}" method="post">@csrf
