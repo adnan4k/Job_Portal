@@ -10,7 +10,7 @@ class ApplicantController extends Controller
 {
     //
     public function index(){
-        $listings = Listing::withCount('users')->where('user_id',auth()->user()->id)->get();
+        $listings = Listing::withCount('users')->where('user_id',auth()->user()->id);
         dd($listings);
          if($listings){
             return view('applicants.index',compact('listings'))->with('error','sorry unable to load the jobs');
@@ -22,5 +22,11 @@ class ApplicantController extends Controller
 
          $listings = Listing::where('users')->where('slug',$listing->slug)->first();
          return view('applicants.show',compact('listings'));
+     }
+
+     public function shortlist($listingId,$userId){
+               
+        $listing = Listing::find($listingId);
+
      }
 }

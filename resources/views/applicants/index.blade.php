@@ -69,14 +69,6 @@
                                     </div>
                                 @endforeach
 
-                                <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-
-                                </tr>
-
                             </tbody>
                         </table>
                     </div>
